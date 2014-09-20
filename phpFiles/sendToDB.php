@@ -1,6 +1,6 @@
 <?php
 
-	include 'sendFunctions.php';
+	include 'insertFunctions.php';
 
 	$action_to_execute = $_GET['action'];
 

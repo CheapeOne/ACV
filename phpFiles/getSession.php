@@ -2,11 +2,11 @@
 
 	session_start();
 
-	if (!(isset($_SESSION['user']) && isset($_SESSION['geolocation']))) {// if these aren't set, we know user isn't logged in, so tell them to do so!
+	if (!(isset($_SESSION['email']) && isset($_SESSION['geolocation']))) {// if these aren't set, we know user isn't logged in, so tell them to do so!
 
 		$arr = array (
 
-		"userName" => null,
+		"email" => null,
 		"geolocation" => null
 
 		);
@@ -18,7 +18,7 @@
 
 		$arr = array (
 
-		"userName" => $_SESSION['user'],
+		"email" => $_SESSION['email'],
 		"geolocation" => $_SESSION['geolocation']
 
 		);
