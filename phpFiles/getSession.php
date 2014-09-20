@@ -1,30 +1,30 @@
 <?php
 
-	session_start();
 
-	if (!(isset($_SESSION['email']) && isset($_SESSION['geolocation']))) {// if these aren't set, we know user isn't logged in, so tell them to do so!
+session_start();
 
-		$arr = array (
+	if (isset($_SESSION['user']) && (time() <= $_SESSION['deathTime'])) {
 
-		"email" => null,
-		"geolocation" => null
+			$arr = array (
+				"username" => $_SESSION['user']
+			);
 
-		);
+			echo json_encode($arr);
 
-		echo json_encode($arr);
-	}
+	} 
 
 	else {
 
-		$arr = array (
+		if (time() > $_SESSION['deathTime']) {
 
-		"email" => $_SESSION['email'],
-		"geolocation" => $_SESSION['geolocation']
+			session_destroy();
+		}
 
-		);
+			$arr = array (
+				"username" => ""
+			);
 
-		echo json_encode($arr);
+			echo json_encode($arr);
 	}
-
 
 ?>

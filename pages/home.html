@@ -1,12 +1,10 @@
 
 
-<div class="ACVGreen">
+<div class="ACVGreen" ng-controller = "homeController" ng-init="getSession()">
 	<div class="page centered-outer">
-		<div class="centered-inner" ng-controller = "homeController">
+		<div class="centered-inner">
 			<br/>
 			<img class="logo" src="img/ACV-Logo.png"/>
-			<br/>
-			<h1>Question</h1>
 			<p></p>
 			<input type="text" placeholder="Question Title" ng-model="myQuestionTitle">
 			<p></p>
@@ -180,5 +178,5 @@
 			<span class="question-info">360 comments</span>
 		</div>
 	</div>
-	
+
 </div>
