@@ -1,40 +1,20 @@
 <?php
 
-include 'basicDB.php';
+	include 'sendFunctions.php';
 
-$host = 'localhost';
-$username = root;
-$password = 'yuhclickyuh';
-$dbName;
-$user_table;
-$registered_user_table;
-$question_table;
-$answer_table;
-$user_answer;
-$user_post;
+	$action_to_execute = $_GET['action'];
 
+	switch($action_to_execute) {
 
-function addQuestion($question_to_add) {
+		case "addQuestion":
+			echo addQuestion($_GET['question_to_add']);//echo true or false to see if it worked or not
+			break;
 
-	global $host, $username, $password, $dbName, $user_table, $registered_user_table, $question_table;
-	global $answer_table, $user_answer, $user_post;
+		case "addUser":
+			echo addUser($_GET['user_to_add']);
+			break;
 
-	connectToDB($username, $password, $host, $dbName);
-	
-	$countQuery = "SELECT COUNT(id) FROM $question_table";
-	$count = mysql_fetch_array(mysql_query($countQuery))[0];//we fetch an array of counts for each column and return the count of column 0
-
-	$addQuestionQuery = "INSERT INTO $question_table VALUES ($count, $question_to_add)";
-	$status = mysql_query($addQuestionQuery);
-
-	if ($status == false) {// if the query failed, for whatever reason, let us know.
-
-		return false;
+		//so on and so forth
 	}
-
-	return true;
-}
-
-
 
 ?>
