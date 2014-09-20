@@ -8,26 +8,26 @@ angular.module('ACVApp.controllers', []).
    
   	$scope.postQuestion = function() {
  
-                var request = $http({
-                method: "post",
-                url: $scope.dbUrl,
-                params: {
-                	action: $scope.myAction,
-                	question_to_add: $scope.myQuestionTitle,
-                	question_body: $scope.myQuestionBody
-                },
-                data:  {
-                        question: $scope.question
-                },
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                });
- 
-                /* Check whether the HTTP Request is Successfull or not. */
-                request.success(function (data) {
-                console.log("POST literally worked");
-                console.log($scope.question);
-                });
-        };
+        var request = $http({
+        method: "post",
+        url: $scope.dbUrl,
+        params: {
+        	action: $scope.myAction,
+        	question_to_add: $scope.myQuestionTitle,
+        	question_body: $scope.myQuestionBody
+        },
+        data:  {
+                question: $scope.question
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+        console.log("POST literally worked");
+        console.log($scope.question);
+        });
+    };
 
   }).
   controller('loginController', function($scope, $http) {
@@ -40,25 +40,25 @@ angular.module('ACVApp.controllers', []).
 
    	$scope.addUser = function() {
  
-                var request = $http({
-                method: "post",
-                url: $scope.dbUrl,
-                params: {
-                	action: $scope.myAction,
-                	user_to_add: $scope.myAlias,
-                	email: $scope.myEmail,
-                	password: $scope.myPassword
-                },
-                data:  {
-                        question: $scope.question
-                },
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                });
- 
-                /* Check whether the HTTP Request is Successfull or not. */
-                request.success(function (data) {
-                console.log("POST literally worked");
-                console.log($scope.question);
-                });
-        };
+        var request = $http({
+        method: "post",
+        url: $scope.dbUrl,
+        params: {
+        	action: $scope.myAction,
+        	user_to_add: $scope.myAlias,
+        	email: $scope.myEmail,
+        	password: $scope.myPassword
+        },
+        data:  {
+                question: $scope.question
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+        console.log("POST literally worked");
+        console.log($scope.question);
+        });
+    };
   });
