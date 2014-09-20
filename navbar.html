@@ -1,4 +1,4 @@
-<div>
+<div ng-controller = "navController">
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	  <div class="container-fluid">
 	  	<!-- Brand and toggle get grouped for better mobile display -->
@@ -26,8 +26,8 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li><a href="/ACV/#/home">Home</a></li>
-	        <li><a data-toggle="modal" data-target="#loginModal" href="">Login</a></li>
-	        <li><a data-toggle="modal" data-target="#userModal" href="">User</a></li>
+	        <li ng-hide = "loggedIn"><a data-toggle="modal" data-target="#loginModal" href="">Login</a></li>
+	        <li ng-show = "loggedIn"><a data-toggle="modal" data-target="#userModal" href="">{{navAlias}}</a></li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 
