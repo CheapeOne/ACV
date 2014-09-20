@@ -3,7 +3,7 @@
 include 'basicDB.php';
 
 $db_host = 'localhost';
-$db_username = 'root';
+$db_user = 'root';
 $db_password = 'yuhclickyuh';
 $db_name = 'acvdatabase';
 
@@ -28,48 +28,72 @@ function isValidLogin($email,$password){
     //The following query returns one or zero rows
 	global $db_username, $db_password, $db_host, $db_name;
 	
-	$dbconn = connectToDB($db_username, $db_password, $db_host, $db_name);
+	$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);
 	$loginQuery = $dbconn->prepare('Select password from (Users as U inner join RegisteredUsers as R on U.UID = R.UID) where email = :email');
 	$loginQuery->execute(array(':email'=> $email));
 	$results = $loginQuery->fetch(PDO::FETCH_ASSOC);
     
     if ($results) {
         if (hash("sha256", $password) == $results['password']) {
-            return "true";
+            return true;
         }
         else {
 			//password check failed
-            return "false";//hash("sha256", $password)." vs. ".$results['password'] ;
+            return false;//hash("sha256", $password)." vs. ".$results['password'] ;
         }
     }
-    	else {
-		//username check failed
-        return "false";
-    	}
-	
+    else {
+	//username check failed
+    return false;
+    }
 }
 
+function getLoginInfo($email,$password){
+	if isValidLogin($email,$password){
+		$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);
+		$loginQuery = $dbconn->prepare('Select password from (Users as U inner join RegisteredUsers as R on U.UID = R.UID) where email = :email');
+		$loginQuery->execute(array(':email'=> $email));
+		$results = $loginQuery->fetch(PDO::FETCH_ASSOC);		
+		return $results //will return data in the form ['col1'=>rowdata,'col2'=>rowdata,...'colX'=>rowdata]
+		}
+	else{
+		return false
+	}
+}
 
+/* USERTYPES:
+0 - Anon
+1 - User
+2 - Mod
+3 - Admin
+*/
 
+//if user isn't logged in (session variables aren't set), then 
+function autoAssignAnonID(){
+//check for ip with usertype 0
+//if ip is
+
+}
+	
 //== Signup: ==
-/*function signup(){
+function signup($UID,$IP,$sessionGeo,$userType,$username,$email,$password){
     //variables needed - $username,$email,$password,$IP,$sessionGeo - username can be a blank string
     //The following query returns one or zero rows
-
 	global $db_user, $db_password, $db_host, $db_name;
 
 	connectToDB($db_user, $db_password, $db_host, $db_name);
-    $existingUserQuery  = $dbconn->query('Select email from RegisteredUsers where email = :email');
+    $existingUserQuery  = $dbconn->prepare('Select email from RegisteredUsers where email = :email');
 	$existingUserQuery->execute(array(':email'=> $email)));
 	$results = $selectQuery->fetch(PDO::FETCH_ASSOC);
 
-    if $results:
+    if $results{
 		//already a user
         return false;
-    else:
+	}
+    else{
 		//add as a user
-        insertUserQuery = INSERT INTO RegisterdUsers (0, '$email', '$username', 0)";
-}
+        insertUserQuery = $dbconn->query('INSERT INTO RegisterdUsers (0, '$email', '$username', 0)");
+	}
 
 //== View Local Questions: ==
 function viewLocalQuestions($UID){
@@ -127,6 +151,6 @@ function viewProfile($UID){
 function rateAnswer(){
     //variables needed - $UID 
     Select AID from Rated where UID = $UID
-}*/
+}
 
 ?>
