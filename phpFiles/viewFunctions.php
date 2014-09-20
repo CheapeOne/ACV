@@ -26,26 +26,31 @@ $user_post;
 function isValidLogin($email,$password){
 	//variables needed - $email,$password
     //The following query returns one or zero rows
-	global $db_user, $db_password, $db_host, $db_name;
+	global $db_username, $db_password, $db_host, $db_name;
 	
-	connectToDB($db_user, $db_password, $db_host, $db_name);
+	$dbconn = connectToDB($db_username, $db_password, $db_host, $db_name);
 	$loginQuery = $dbconn->prepare('Select password from (Users as U inner join RegisteredUsers as R on U.UID = R.UID) where email = :email');
-	$loginQuery->execute(array(':email'=> $email)));
-	$results = $selectQuery->fetch(PDO::FETCH_ASSOC);
+	$loginQuery->execute(array(':email'=> $email));
+	$results = $loginQuery->fetch(PDO::FETCH_ASSOC);
     
-    if $results:
-        if $password == $results:
-            return True;
-        else:
+    if ($results) {
+        if (hash("sha256", $password) == $results['password']) {
+            return "true";
+        }
+        else {
 			//password check failed
-            return False;
-    else:
+            return "false";//hash("sha256", $password)." vs. ".$results['password'] ;
+        }
+    }
+    	else {
 		//username check failed
-        return False;
+        return "false";
+    	}
+	
 }
 
 //== Signup: ==
-function signup(){
+/*function signup(){
     //variables needed - $username,$email,$password,$IP,$sessionGeo - username can be a blank string
     //The following query returns one or zero rows
 
@@ -61,7 +66,7 @@ function signup(){
         return false;
     else:
 		//add as a user
-        insertUserQuery = INSERT INTO RegisterdUsers ()
+        insertUserQuery = INSERT INTO RegisterdUsers (0, '$email', '$username', 0)";
 }
 
 //== View Local Questions: ==
@@ -120,6 +125,6 @@ function viewProfile($UID){
 function rateAnswer(){
     //variables needed - $UID 
     Select AID from Rated where UID = $UID
-}
+}*/
 
 ?>

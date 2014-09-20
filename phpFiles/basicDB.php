@@ -6,17 +6,21 @@
 	$log_file = 'ACV_log_file.txt';
 	
 	function writeToLog($msg){
-		put_file_contents($log_file,$msg,FILE_APPEND);
+
+		global $log_file;
+		file_put_contents($log_file,$msg,FILE_APPEND);
 		echo '[{$log_file}] '.time().' $msg';
 	}
 	
 	function connectToDB($db_user, $db_password, $db_host, $db_name) {
 		try {
-			$dbconn = new PDO('mysql:host=localhost;dbname={$db_name};charset=utf8, {$username}, {$password}');
+			$dbconn = new PDO("mysql:host=$db_host;dbname=$db_name", "$db_user", "$db_password");
+			
 			return $dbconn;
 			
-		} catch (PDOException $ex) {
-			$msg = 'Connection failed:'.$ex->getMessage()';
+		}
+		 catch (PDOException $ex) {
+			$msg = 'Connection failed:'.$ex->getMessage();
 			writeToLog($msg);
 		}
 	}
