@@ -1,23 +1,68 @@
 
-html{
+.page{
+	height: 100%;
+	width: 100%;
+	padding-top: 50px;
+
 	background-color: #56CC81;
 }
 
-div{
-	font-family: 'Roboto';
+#fourOhFour{
+
 }
 
-h1,p{
-	color: white;
+#fourOhFour p{
+	color: black;
 }
 
-.alert{
-	color: red;
-	font-size: 30pt;
+.navbar{
+	margin: 0px;
 }
 
-.ACVGreen{
-	background-color: #56CC81;
+.navbar-logo{
+	width: 100px;
 }
+
+.modal-content{
+	border-radius: 0px;
+}
+
+.modal-content h1, .modal-content p{
+	color: grey;
+}
+
+.logo{
+	width: 100px;
+}
+
+.question{
+	display: block;
+
+	margin: 30px;
+}
+	
+	.vote-button{
+		width:30px;
+	}
+
+	.vote-score{
+		color: white;
+		font-size: 15pt;
+		font-weight: 500;
+	}
+
+.question-mid{
+	background-color: rgba(255,255,255,.9);
+	color: grey;
+	padding: 15px 10px;
+	margin: 12px 0px;
+}
+
+	.question-title{
+		font-size: 18pt;
+	}
+
+	.question-time-info{
+	}
 
 
