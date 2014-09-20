@@ -1,19 +1,36 @@
 
-<div class="page centered-outer">
-	<div class="centered-inner" ng-controller = "homeController">
-		<br/>
-		<img class="logo" src="img/ACV-Logo.png"/>
-		<br/>
-		<h1>Question</h1>
-		<p></p>
-		<input type="text" placeholder="Question Title" ng-model="myQuestionTitle">
-		<p></p>
-		<input type="text" placeholder="Question Body" ng-model="myQuestionBody">
-		<br/>
-		<br/>
-		<button class="btn btn-default" ng-click="postQuestion()">Add Question</button>
 
-		<ng-include src="'pages/loginModal.html'"></ng-include>
-		<ng-include src="'pages/signupModal.html'"></ng-include>
+<div class="ACVGreen">
+	<div class="page centered-outer">
+		<div class="centered-inner" ng-controller = "homeController">
+			<br/>
+			<img class="logo" src="img/ACV-Logo.png"/>
+			<br/>
+			<h1>Question</h1>
+			<p></p>
+			<input type="text" placeholder="Question Title" ng-model="myQuestionTitle">
+			<p></p>
+			<input type="text" placeholder="Question Body" ng-model="myQuestionBody">
+			<br/>
+			<br/>
+			<button class="btn btn-default" ng-click="postQuestion()">Add Question</button>
+
+			<ng-include src="'pages/loginModal.html'"></ng-include>
+			<ng-include src="'pages/signupModal.html'"></ng-include>
+		</div>
+	</div>
+
+	<div class="row question">
+
+		<div class="col-md-1 question-left ACVGreen">
+			<span class="vote-score">9001</span>
+		</div>
+
+		<div class="col-md-9 question-mid">
+			<span class="question-title">How do I dude?</span>
+			<span class="question-info"> by DoubleOhDude</span>
+			<span class="question-info">360 comments</span>
+		</div>
+
 	</div>
 </div>

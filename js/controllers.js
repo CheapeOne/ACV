@@ -30,6 +30,39 @@ angular.module('ACVApp.controllers', []).
     };
 
   }).
+  controller('questionController', function($scope, $http) {
+
+  	$scope.showLoginModal = false;
+
+  	$scope.myEmail;
+  	$scope.myPassword;
+  	$scope.dbUrl = "phpFiles/sendToDB.php";
+  	$scope.myAction = "loginUser";
+
+   	$scope.loginUser = function() {
+
+        var request = $http({
+        method: "post",
+        url: $scope.dbUrl,
+        params: {
+        	action: $scope.myAction,
+        	email: $scope.myEmail,
+        	password: $scope.myPassword
+        },
+        data:  {
+                question: $scope.question
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+        console.log("Login literally worked");
+        console.log($scope.question);
+        });
+    };
+
+  }).
   controller('loginController', function($scope, $http) {
 
   	$scope.showLoginModal = false;
