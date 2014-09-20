@@ -5,12 +5,15 @@
 		<img class="logo" src="img/ACV-Logo.png"/>
 		<br/>
 		<h1>Question</h1>
-		<p>Question Title</p>
-		<input type="text" ng-model="myQuestionTitle">
-		<p>Question Body</p>
-		<input type="text" ng-model="myQuestionBody">
+		<p></p>
+		<input type="text" placeholder="Question Title" ng-model="myQuestionTitle">
+		<p></p>
+		<input type="text" placeholder="Question Body" ng-model="myQuestionBody">
 		<br/>
 		<br/>
 		<button class="btn btn-default" ng-click="postQuestion()">Add Question</button>
+
+		<ng-include src="'pages/loginModal.html'"></ng-include>
+		<ng-include src="'pages/signupModal.html'"></ng-include>
 	</div>
 </div>
