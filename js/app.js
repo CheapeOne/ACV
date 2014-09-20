@@ -1,10 +1,7 @@
 var ACVApp = angular.module("ACVApp", [
-  'ngRoute',
-  'ACVApp.controllers'
-]);
-
-/*
-.
+  'ACVApp.controllers',
+  'ngRoute'
+]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.
 	when("/404", 
@@ -20,4 +17,3 @@ config(['$routeProvider', function($routeProvider) {
 		redirectTo: '/404'
 	});
 }]);
-*/
