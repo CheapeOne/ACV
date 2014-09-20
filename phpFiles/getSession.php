@@ -21,7 +21,7 @@ session_start();
 		}
 
 			$arr = array (
-				"username" => null
+				"username" => ""
 			);
 
 			echo json_encode($arr);

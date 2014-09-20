@@ -9,7 +9,7 @@ session_start();
 	if (!isset($_SESSION['user'])) {
 
 	$_SESSION['user'] = $name;
-	$_SESSION['deathTime'] = time() + 60;
+	$_SESSION['deathTime'] = time() + 90;
 	} 
 
 	else {
