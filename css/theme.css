@@ -1,0 +1,20 @@
+html{
+	background-color: #77DD77;
+}
+
+div{
+	font-family: 'Roboto';
+}
+
+h1,p{
+	color: white;
+}
+
+.page{
+	background-color: #77DD77;
+}
+
+.alert{
+	color: red;
+	font-size: 30pt;
+}

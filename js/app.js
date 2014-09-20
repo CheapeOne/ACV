@@ -1,3 +1,4 @@
+
 var ACVApp = angular.module("ACVApp", [
   'ACVApp.controllers',
   'ngRoute'
@@ -11,6 +12,10 @@ config(['$routeProvider', function($routeProvider) {
 	when("/home",
 	{
 		templateUrl: "pages/home.html",
+	}).
+	when("/login",
+	{
+		templateUrl: "pages/login.html",
 	}).
 	otherwise(
 	{

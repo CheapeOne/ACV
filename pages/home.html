@@ -1,3 +1,16 @@
-<div ng-controller = "homeController">
-	<h1>{{homeMessage}}</h1>
+
+<div class="page centered-outer">
+	<div class="centered-inner" ng-controller = "homeController">
+		<br/>
+		<img class="logo" src="img/ACV-Logo.png"/>
+		<br/>
+		<h1>Question</h1>
+		<p>Question Title</p>
+		<input type="text" ng-model="myQuestionTitle">
+		<p>Question Body</p>
+		<input type="text" ng-model="myQuestionBody">
+		<br/>
+		<br/>
+		<button class="btn btn-default" ng-click="postQuestion()">Add Question</button>
+	</div>
 </div>

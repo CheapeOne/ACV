@@ -1,9 +1,28 @@
-html{
-	background-color: white;
+
+.centered{
+	display: block;
+    margin: 0 auto;
 }
 
-.alert{
-	color: red;
-	font-size: 30pt;
+.centered-outer {
+  width: 100%;
+  text-align: center;
+}
+
+.centered-inner {
+  display: inline-block;
+}
+
+.page{
+	height: 100%;
+	width: 100%;
+}
+
+.navbar{
+	margin: 0px;
+}
+
+.logo{
+	width: 100px;
 }
 
