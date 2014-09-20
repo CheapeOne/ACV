@@ -7,3 +7,17 @@ html{
 	font-size: 30pt;
 }
 
+.centered{
+	display: block;
+    margin: 0 auto;
+}
+
+.centered-outer {
+  width: 100%;
+  text-align: center;
+}
+
+.centered-inner {
+  display: inline-block;
+}
+
