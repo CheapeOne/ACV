@@ -44,7 +44,7 @@ angular.module('ACVApp.controllers', []).
   	$scope.myEmail;
   	$scope.myPassword;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
-  	$scope.myAction = "loginUser";
+  	$scope.myAction = "isValidLogin";
 
    	$scope.loginUser = function() {
 
@@ -56,16 +56,17 @@ angular.module('ACVApp.controllers', []).
         	email: $scope.myEmail,
         	password: $scope.myPassword
         },
-        data:  {
-                question: $scope.question
-        },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        console.log("Login literally worked");
-        console.log($scope.question);
+        	if(data == "false"){
+        		alert("Incorrect Email or Password");
+        	}
+        	else{
+        		console.log("Login probably literally worked");
+        	}
         });
     };
 

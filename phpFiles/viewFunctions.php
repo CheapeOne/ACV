@@ -49,6 +49,8 @@ function isValidLogin($email,$password){
 	
 }
 
+
+
 //== Signup: ==
 /*function signup(){
     //variables needed - $username,$email,$password,$IP,$sessionGeo - username can be a blank string
