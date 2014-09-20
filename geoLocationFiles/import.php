@@ -26,10 +26,10 @@ require "dbip.class.php";
 
 //$opts = getopt("f:d:t:");
 
-$filename = "dbip-city-2014-09.csv";//$opts["f"];
+$filename = "dbip-city.csv";//$opts["f"];
 $type = "city";//$opts["d"];
 
-$table = "db-ip";//$opts["t"]
+$table = "dbip_lookup";//$opts["t"]
 //or $table = "dbip_lookup";
 
 /*if (!isset($filename) || !isset($type)) {
@@ -48,13 +48,13 @@ switch (strtolower($type)) {
 try {
 
         // Connect to the database
-        //$db = new PDO("mysql:host=localhost;dbname=acv", "root", "yuhclickyuh");
+        $db = new PDO("mysql:host=localhost;dbname=acvdatabase", "root", "yuhclickyuh");
 
         // Alternatively connect to MySQL using the old interface
         // Comment the PDO statement above and uncomment the mysql_ calls
         // below if your PHP installation doesn't support PDO :
-         $db = mysql_connect("localhost", "root", "yuhclickyuh");
-         mysql_select_db("db-ip", $db);
+         //$db = mysql_connect("localhost", "root", "yuhclickyuh");
+         //mysql_select_db("acvdatabase", $db);
 
         // Instanciate a new DBIP object with the database connection
         $dbip = new DBIP($db);
@@ -62,8 +62,8 @@ try {
         // Alternatively instanciate a DBIP_MySQL object
         // Comment the new statement above and uncomment below if your PHP
         // installation doesn't support PDO :
-        $dbip = new DBIP_MySQL($db);
-
+        //$dbip = new DBIP_MySQL($db);
+    set_time_limit(600);
 	$nrecs = $dbip->Import_From_CSV($filename, $dbtype, $table, function($progress) {
 		echo "\r{$progress} ...";
 	});
