@@ -1,3 +1,14 @@
-<div ng-controller = "homeController">
-	<h1>{{homeMessage}}</h1>
+<div class="centered-outer">
+	<div class="centered-inner" ng-controller = "homeController">
+		<h1>Welcome</h1>
+		<br/>
+
+		<h1>Question</h1>
+		<p>Question Title</p>
+		<input type="text" ng-model="myQuestionTitle">
+		<p>Question Body</p>
+		<input type="text" ng-model="myQuestionBody">
+		<br/>
+		<button ng-click="postQuestion()">Add Question</button>
+	</div>
 </div>
