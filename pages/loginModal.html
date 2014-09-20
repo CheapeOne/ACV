@@ -10,14 +10,14 @@
 
 		<input type="text" placeholder="Email" ng-model="myEmail">
 		<p></p>
-		<input type="text" placeholder="Password" ng-model="myPassword">
+		<input type="password" placeholder="Password" ng-model="myPassword">
 
 		<p>No Account? <a data-dismiss="modal" data-toggle="modal" data-target="#signupModal" href="">Sign Up</a> or post anonymously</p>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="loginUser()">Login</button>
+        <button type="button" class="btn btn-primary" ng-click="isValidLogin()">Login</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
