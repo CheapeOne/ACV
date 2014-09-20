@@ -1,10 +1,10 @@
 <?php
 
 	session_start();
-	$userName = $_GET['user'];
+	$userName = $_GET['email'];
 	$geoLocation = 0;
 
-	$_SESSION['user'] = $userName;
+	$_SESSION['email'] = $email;
 	$_SESSION['geolocation'] = $geoLocation;
 
 ?>

@@ -14,25 +14,30 @@ $user_answer;
 $user_post;
 
 
+		//$selectQuery = $dbconn->query('SELECT * FROM table');
+		//$results = $selectQuery->fetchAll(PDO::FETCH_ASSOC)
+
+		//$selectQuery = $dbconn->prepare("SELECT * FROM table WHERE id=:id AND name=:name");
+		//$selectQuery->execute(array(':name' => $name, ':id' => $id));
+		//$rows = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
+
 function addQuestion($question_to_add, $content) {
 
 	global $host, $username, $password, $dbName, $user_table, $registered_user_table, $question_table;
 	global $answer_table, $user_answer, $user_post;
 
 
-	connectToDB($username, $password, $host, $dbName); // make sure this doesn't need to be called multiple times
+	$dbconn = connectToDB($username, $password, $host, $dbName); // make sure this doesn't need to be called multiple times
 	
-	$countQuery = "SELECT COUNT(QID) FROM questions";
-	$count = mysql_fetch_array(mysql_query($countQuery))[0] ;//we fetch an array of counts for each column and return the count of column 0
+	//$countQuery = $dbconn->query("Select COUNT()")
 
-	$addQuestionQuery = "INSERT INTO questions (QID, UID, title, _timestamp, numRating, content, category, location) VALUES ('$count', 7, '$question_to_add', 0, 0, '$content', 0, 0)";
-	$status = mysql_query($addQuestionQuery);
+	$result = db->query("INSERT INTO questions (QID, UID, title, _timestamp, numRating, content, category, location) VALUES ('$count', 7, '$question_to_add', 0, 0, '$content', 0, 0)");
 	
 	if ($status == false) {// if the query failed, for whatever reason, let us know.
-		file_put_contents("out", mysql_error());
+		writeToLog(mysqlError())
 		return false;
 	}
-	file_put_contents("out","true");
+	writeToLog('$success');
 	return true;
 }
 
