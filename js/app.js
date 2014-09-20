@@ -1,4 +1,5 @@
-var ACVApp = angular.module('ACVApp', [
+var ACVApp = angular.module("ACVApp", [
+  'ngRoute',
   'ACVApp.controllers'
 ]);
 
