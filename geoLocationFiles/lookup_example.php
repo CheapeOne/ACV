@@ -39,10 +39,10 @@ try {
 	// Comment the PDO statement above and uncomment the mysql_ calls
 	// below if your PHP installation doesn't support PDO :
 	$db = mysql_connect("localhost", "root", "yuhclickyuh");
-	mysql_select_db("db-ip", $db);
+	mysql_select_db("acvdatabase", $db);
 
 	// Instanciate a new DBIP object with the database connection
-	$dbip = new DBIP($db);
+	//$dbip = new DBIP($db);
 
 	// Alternatively instanciate a DBIP_MySQL object
 	// Comment the new statement above and uncomment below if your PHP
@@ -50,11 +50,12 @@ try {
 	$dbip = new DBIP_MySQL($db);
 
 	// Lookup an IP address
-	$inf = $dbip->Lookup('143.215.55.141');
+	$inf = $dbip->Lookup('174.50.126.216');
 	
 	// Show the associated country
 	echo "country = " . $inf->country . "\n";
 	echo $inf->city;
+	echo ", ".$inf -> stateprov;
 
 } catch (DBIP_Exception $e) {
 

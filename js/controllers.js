@@ -1,4 +1,6 @@
 angular.module('ACVApp.controllers', []).
+
+
   controller('homeController', function($scope, $http) {
   	
   	$scope.myAction = "addQuestion";
@@ -24,19 +26,82 @@ angular.module('ACVApp.controllers', []).
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        console.log("POST literally worked");
+        console.log("Question literally worked");
         console.log($scope.question);
         });
     };
 
   }).
-  controller('loginController', function($scope, $http) {
+
+  controller('navController', function($scope, $http, $rootScope) {
+
+  	$scope.loggedIn = false;
+  	$scope.navAlias = "";
+
+  	$rootScope.$on("userLogin", function(){
+  		$scope.navAlias = $rootScope.userAlias;
+  		$scope.loggedIn = true;
+  	});
+
+  }).
+
+  controller('questionController', function($scope, $http) {
+
+  }).
+
+  controller('loginController', function($scope, $http, $rootScope) {
+
+  	$scope.myEmail;
+  	$scope.myPassword;
+  	$scope.dbUrl = "phpFiles/sendToDB.php";
+
+   	$scope.isValidLogin = function() {
+
+        var request = $http({
+        method: "post",
+        url: $scope.dbUrl,
+        params: {
+        	action: "isValidLogin",
+        	email: $scope.myEmail,
+        	password: $scope.myPassword
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+        	if(data == "false"){
+        		alert("Incorrect Email or Password");
+        	}
+        	else{
+        		console.log("Login probably literally worked");
+        		$rootScope.userAlias = "Double Oh Dude";
+        		$rootScope.$emit("userLogin");
+        		$('#loginModal').modal('hide');
+        	}
+        });
+    };
+  }).
+
+  controller('userController', function($scope, $http, $rootScope) {
 
   	$scope.myAlias;
   	$scope.myEmail;
   	$scope.myPassword;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
-  	$scope.myAction = "addUser";
+
+  	$rootScope.$on("userLogin", function(){
+  		$scope.myAlias = $rootScope.userAlias;
+  	});
+
+  }).
+
+  controller('signupController', function($scope, $http) {
+
+  	$scope.myAlias;
+  	$scope.myEmail;
+  	$scope.myPassword;
+  	$scope.dbUrl = "phpFiles/sendToDB.php";
 
    	$scope.addUser = function() {
  
@@ -44,7 +109,7 @@ angular.module('ACVApp.controllers', []).
         method: "post",
         url: $scope.dbUrl,
         params: {
-        	action: $scope.myAction,
+        	action: "addUser",
         	user_to_add: $scope.myAlias,
         	email: $scope.myEmail,
         	password: $scope.myPassword
@@ -57,8 +122,9 @@ angular.module('ACVApp.controllers', []).
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        console.log("POST literally worked");
+        console.log("Signup literally worked");
         console.log($scope.question);
         });
     };
+
   });

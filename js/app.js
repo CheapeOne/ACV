@@ -13,10 +13,6 @@ config(['$routeProvider', function($routeProvider) {
 	{
 		templateUrl: "pages/home.html",
 	}).
-	when("/login",
-	{
-		templateUrl: "pages/login.html",
-	}).
 	otherwise(
 	{
 		redirectTo: '/404'

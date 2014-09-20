@@ -1,4 +1,33 @@
 
+html{
+	background-color: #56CC81;
+}
+
+div{
+	font-family: 'Roboto';
+}
+
+h1,p{
+	color: white;
+}
+
+.alert{
+	color: red;
+	font-size: 30pt;
+}
+
+.ACVGreen{
+	background-color: #56CC81;
+}
+
+a{
+	color: grey;
+}
+
+a:hover{
+	color: grey;
+}
+
 .centered{
 	display: block;
     margin: 0 auto;
@@ -13,22 +42,4 @@
   display: inline-block;
 }
 
-.page{
-	height: 100%;
-	width: 100%;
-}
-
-.navbar{
-	margin: 0px;
-}
-
-.logo{
-	width: 100px;
-}
-
-.modal{
-	width: 400px;
-	height: 600px;
-	background-color: white;
-}
 

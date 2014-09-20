@@ -3,35 +3,26 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');
 	mysql_error();
+	$log_file = 'ACV_log_file.txt';
 	
-	function connectToDB($user, $password, $server_host, $db_name) {
+	function writeToLog($msg){
 
-		$conn = mysql_connect($server_host, $user, $password);
-
-		if (!$conn) {
-
-			die("Could not connect: " . mysql_error());
-			//
-		} 
-
-		
-		mysql_select_db($db_name, $conn);
-
+		global $log_file;
+		file_put_contents($log_file,$msg,FILE_APPEND);
+		echo '[{$log_file}] '.time().' $msg';
 	}
-
-
-	/////////MAY NOT NEED THESE//////////
-	function sendFunction($user, $password, $server_host, $db_name, $table, $query) {
-
-		connectToDB($user, $password, $server_host, $db_name);
-		mysql_query($query);
-	}
-
-	function retrieveFunction($user, $password, $server_host, $db_name, $table, $query) {
-
-		connectToDB($user, $password, $server_host, $db_name);
-		$retrieved = mysql_query($query);
-		return mysql_fetch_array($retrieved);
+	
+	function connectToDB($db_user, $db_password, $db_host, $db_name) {
+		try {
+			$dbconn = new PDO("mysql:host=$db_host;dbname=$db_name", "$db_user", "$db_password");
+			
+			return $dbconn;
+			
+		}
+		 catch (PDOException $ex) {
+			$msg = 'Connection failed:'.$ex->getMessage();
+			writeToLog($msg);
+		}
 	}
 
 ?>
