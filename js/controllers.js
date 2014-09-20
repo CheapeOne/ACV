@@ -1,6 +1,5 @@
 angular.module('ACVApp.controllers', []).
   controller('homeController', function($scope, $http) {
-  	$scope.homeMessage = "WELCOME YUH";
   	
   	$scope.myAction = "addQuestion";
   	$scope.myQuestionTitle;
@@ -31,14 +30,7 @@ angular.module('ACVApp.controllers', []).
         };
 
   }).
-  controller('404Controller', function($scope) {
-
-  	$scope.message = "NOTHING TO SEE HERE";
-   
-  }).
   controller('loginController', function($scope, $http) {
-
-  	$scope.loginMessage = "Signup Page";
 
   	$scope.myAlias;
   	$scope.myEmail;
