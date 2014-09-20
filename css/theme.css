@@ -11,19 +11,13 @@ h1,p{
 	color: white;
 }
 
-.page{
-	background-color: #56CC81;
-}
-
 .alert{
 	color: red;
 	font-size: 30pt;
 }
 
-.modal-content{
-	border-radius: 0px;
+.ACVGreen{
+	background-color: #56CC81;
 }
 
-.modal-content h1, .modal-content p{
-	color: grey;
-}
+
