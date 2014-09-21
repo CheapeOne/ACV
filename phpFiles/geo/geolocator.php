@@ -17,11 +17,11 @@ try {
 
 	$inf = $dbip->Lookup($ip_address);
 
-	echo $inf->city.', '.$inf -> stateprov.', '.$inf -> country;
+	echo $inf->city.', '.$inf -> stateprov;
 
 } catch (DBIP_Exception $e) {
 
-	echo "error: {$e->getMessage()}\n";
+	echo "Atlanta, Georgia, US";
 
 }
 

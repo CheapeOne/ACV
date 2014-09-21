@@ -3,13 +3,13 @@ angular.module('ACVApp.controllers', []).
 
   controller('homeController', function($scope, $http, $rootScope) {
   	
-  	$scope.myQuestionTitle;
-  	$scope.myQuestionBody;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
   	$scope.getLocationUrl = "phpFiles/geo/geolocator.php";
   	$scope.getSessionUrl = "phpFiles/sessions/getSession.php";
   	$scope.setSessionUrl = "phpFiles/sessions/setSession.php";
   	$scope.killSessionUrl = "phpFiles/sessions/killSession.php";
+
+  	$scope.myLocation = "Atlanta, Georgia, US";
     
   	/*	
 		Event Listeners
@@ -39,7 +39,7 @@ angular.module('ACVApp.controllers', []).
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
         	console.log("Get Location probably literally worked");
-        	console.log("Location Data: "+data);
+        	$scope.myLocation = data;
 
         });
     };
@@ -98,30 +98,6 @@ angular.module('ACVApp.controllers', []).
         });
     };
 
-
-
-    $scope.postQuestion = function() {
- 
-        var request = $http({
-        method: "post",
-        url: $scope.dbUrl,
-        params: {
-        	action: "addQuestion",
-        	question_to_add: $scope.myQuestionTitle,
-        	question_body: $scope.myQuestionBody
-        },
-        data:  {
-                question: $scope.question
-        },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        });
-
-        /* Check whether the HTTP Request is Successfull or not. */
-        request.success(function (data) {
-        	console.log("Question literally worked");
-        });
-    };
-
   }).
 
   controller('navController', function($scope, $http, $rootScope) {
@@ -151,8 +127,33 @@ angular.module('ACVApp.controllers', []).
 
   }).
 
-  controller('questionController', function($scope, $http) {
+  controller('questionController', function($scope, $http, $rootScope) {
 
+  	$scope.myQuestionTitle;
+  	$scope.myQuestionBody;
+
+  	$scope.postQuestion = function() {
+ 
+        var request = $http({
+        method: "post",
+        url: $scope.dbUrl,
+        params: {
+        	action: "addQuestion",
+        	question_to_add: $scope.myQuestionTitle,
+        	question_body: $scope.myQuestionBody
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+        	console.log("Question literally maybe worked");
+        	console.log("SWEET SWEET QUESATIONS "+$scope.myQuestionTitle);
+        	if(data == false){
+        		alert("Post Question Failed");
+        	}
+        });
+    };
   }).
 
   controller('loginController', function($scope, $http, $rootScope) {
