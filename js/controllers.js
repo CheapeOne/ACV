@@ -40,7 +40,7 @@ angular.module('ACVApp.controllers', []).
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        	//console.log("Get Location probably literally worked");
+        	console.log("Get Location probably literally worked");
         	$scope.myLocation = data;
 
 
@@ -58,9 +58,9 @@ angular.module('ACVApp.controllers', []).
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        	//console.log("Session probably literally got");
-        	//var sessionData = angular.fromJson(data)
-        	//console.log(angular.fromJson(data)["username"]);
+        	console.log("Session probably literally got");
+        	var sessionData = angular.fromJson(data)
+        	console.log(angular.fromJson(data)["username"]);
 
 
         	if(angular.fromJson(data)["username"] != ""){
@@ -84,7 +84,7 @@ angular.module('ACVApp.controllers', []).
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        	//console.log("Session probably literally set");
+        	console.log("Session probably literally set");
         });
     };
 
@@ -98,7 +98,7 @@ angular.module('ACVApp.controllers', []).
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        	//console.log("Session probably literally killed");
+        	console.log("Session probably literally killed");
         });
     };
 
@@ -125,9 +125,9 @@ angular.module('ACVApp.controllers', []).
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
 
-        	//console.log("Question literally maybe worked");
-        	//console.log("SWEET SWEET QUESATIONS "+$scope.myQuestionTitle);
-        	//console.log(data);
+        	console.log("Question literally maybe worked");
+        	console.log("SWEET SWEET QUESATIONS "+$scope.myQuestionTitle);
+        	console.log(data);
         	if(data == false){
         		alert("Post Question Failed");
         	}
@@ -157,7 +157,7 @@ angular.module('ACVApp.controllers', []).
         	if(data == false){
         		alert("No Questions Found! Be the first today!");
         	}else{
-        		//console.log("Got Q's");
+        		console.log("Got Q's");
         		$scope.questions = data;
         	}
         });
@@ -226,10 +226,10 @@ angular.module('ACVApp.controllers', []).
         		alert("Incorrect Email or Password");
         	}
         	else{
-        		//console.log("Login probably literally worked");
-        		//console.log(data);
-        		//console.log("email: " + angular.fromJson(data)["email"]);
-        		//console.log("whole dealarino "+angular.fromJson(data));
+        		console.log("Login probably literally worked");
+        		console.log(data);
+        		console.log("email: " + angular.fromJson(data)["email"]);
+        		console.log("whole dealarino "+angular.fromJson(data));
 
         		$rootScope.userAlias = angular.fromJson(data)["userName"];
         		$rootScope.userEmail = angular.fromJson(data)["email"];
@@ -255,7 +255,7 @@ angular.module('ACVApp.controllers', []).
   	$scope.convertDate = function(unix_timestamp){
 
   		$scope.time= Date(unix_timestamp * 1000).format('h:i:s');
-  		//console.log("TIME IS: "+$scope.time);
+  		console.log("TIME IS: "+$scope.time);
   	};
   }).
 
@@ -298,7 +298,7 @@ angular.module('ACVApp.controllers', []).
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        	//console.log("Signup probably literally worked");
+        	console.log("Signup probably literally worked");
         	if(data == "false"){
         		alert("User Already Exists");
         	}
