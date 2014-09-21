@@ -6,7 +6,7 @@ angular.module('ACVApp.controllers', []).
   	$scope.myQuestionTitle;
   	$scope.myQuestionBody;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
-  	  	$scope.getSessionUrl = "phpFiles/getSession.php";
+  	  	$scope.getSessionUrl = "phpFiles/sessions/getSession.php";
     
   	$scope.getLocation = function() {
  
@@ -92,7 +92,7 @@ angular.module('ACVApp.controllers', []).
   	$scope.myEmail;
   	$scope.myPassword;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
-  	$scope.setSessionUrl = "phpFiles/setSession.php";
+  	$scope.setSessionUrl = "phpFiles/sessions/setSession.php";
 
    	$scope.isValidLogin = function() {
 

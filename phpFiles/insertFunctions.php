@@ -1,6 +1,8 @@
 <?php
 
-include 'basicDB.php';
+if (!function_exists('connectToDB')) {
+include "basicDB.php";
+}
 
 $host = 'localhost';
 $username = root;

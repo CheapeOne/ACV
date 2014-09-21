@@ -1,9 +1,11 @@
 <?php
 
-include 'basicDB.php';
+if (!function_exists('connectToDB')) {
+include "basicDB.php";
+}
 
 $host = 'localhost';
-$username = root;
+$username = 'root';
 $password = 'yuhclickyuh';
 $dbName = 'acvdatabase';
 $user_table ='users';
