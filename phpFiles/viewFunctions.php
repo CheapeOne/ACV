@@ -168,7 +168,9 @@ function viewProfile($UID){
     'Select * from RegisteredUsers where UID = $otherUID'
 */
 //== Set/Change Username: ==
-function changeUsername($new_username){ 
+
+
+/*function changeUsername($new_username){ 
     global $db_user, $db_password, $db_host, $db_name;
 	$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);	
 
@@ -223,9 +225,9 @@ function addAnswer($QID,$title,$content,$category,$_timestamp){
 		return false;
 	}
 	return $affected_rows;
-}
-/*//== Rate Answers: ==
-function rateAnswer(){
+}*/
+//== Rate Answers: ==
+/*function rateAnswer(){
     global $db_user, $db_password, $db_host, $db_name;
 	$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);	
 
@@ -233,4 +235,38 @@ function rateAnswer(){
     Select AID from Rated where UID = $UID
 }
 */
+
+//== Add Question: ==
+//== Add Question: ==
+function addQuestion($UID, $title,$content,$category,$_timestamp){
+    global $db_user, $db_password, $db_host, $db_name;
+        $dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);     
+ 
+        $allQIDsQuery  = $dbconn->query("Select QID from Questions");
+        $results = $allQIDsQuery->fetchAll(PDO::FETCH_ASSOC);
+        $QID = mt_rand();
+        while (in_array($QID,$results)){
+                $QID = mt_rand();
+                }      
+               
+        $insertQuestionStatement  = $dbconn->prepare("insert into questions (qid,uid,title,content,category,_timestamp,numRating, location) values (:QID,:UID,:title, :content,:category,:_timestamp,'0', '0')");
+        $insertQuestionStatement->execute(array(":QID"=>$QID,":UID"=>$UID,":title"=>$title,":content"=>$content,":category"=>$category,":_timestamp"=>$_timestamp));   
+        $affected_rows = $insertQuestionStatement->rowCount();
+        if ($affected_rows == 0){
+                return false;
+        }
+        return $affected_rows;
+}
+
+function viewQuestions($questionLimit){
+    global $db_user, $db_password, $db_host, $db_name;
+ 
+        $dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);     
+        $viewLocalQuery = $dbconn->prepare("(Select * from Questions Order by _timestamp desc) limit $questionLimit"); //a little more logic needed here in the like clause
+        $viewLocalQuery->execute();
+        $results = $viewLocalQuery->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($results);
+        //Order by _timestamp desc
+}
+
 ?>

@@ -37,6 +37,13 @@
 			echo getLoginInfo($_GET['email'], $_GET['password']);
 			break;
 
+		case "addQuestion":
+			echo addQuestion('7', $_GET['question_to_add'], $_GET['question_body'], 'general', time());
+			break;
+
+		case "viewQuestions":
+			echo viewQuestions($_GET['questionLimit']);
+			break;
 
 		//so on and so forth
 	}

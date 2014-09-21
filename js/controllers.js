@@ -10,6 +10,8 @@ angular.module('ACVApp.controllers', []).
   	$scope.killSessionUrl = "phpFiles/sessions/killSession.php";
 
   	$scope.myLocation = "Atlanta, Georgia, US";
+
+  	$scope.Math = window.Math;
     
   	/*	
 		Event Listeners
@@ -40,6 +42,8 @@ angular.module('ACVApp.controllers', []).
         request.success(function (data) {
         	console.log("Get Location probably literally worked");
         	$scope.myLocation = data;
+
+
 
         });
     };
@@ -98,6 +102,71 @@ angular.module('ACVApp.controllers', []).
         });
     };
 
+    $scope.myQuestionTitle;
+  	$scope.myQuestionBody = "";
+  	$scope.questions;
+  	$scope.currentTime;
+
+  	$scope.myQuestionLimit = 15;
+
+  	$scope.postQuestion = function() {
+ 
+        var request = $http({
+        method: "get",
+        url: $scope.dbUrl,
+        params: {
+        	action: "addQuestion",
+        	question_to_add: $scope.myQuestionTitle,
+        	question_body: $scope.myQuestionBody
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+
+        	console.log("Question literally maybe worked");
+        	console.log("SWEET SWEET QUESATIONS "+$scope.myQuestionTitle);
+        	console.log(data);
+        	if(data == false){
+        		alert("Post Question Failed");
+        	}
+        	else{
+        		$('#questionField').val('');
+        		$scope.getQuestions();
+        	}
+        });
+    };
+
+    $scope.getQuestions = function() {
+ 
+ 		$scope.currentTime = Date.now();
+        var request = $http({
+        method: "get",
+        url: $scope.dbUrl,
+        params: {
+        	action: "viewQuestions",
+        	questionLimit: $scope.myQuestionLimit
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+
+        	if(data == false){
+        		alert("No Questions Found! Be the first today!");
+        	}else{
+        		console.log("Got Q's");
+        		$scope.questions = data;
+        	}
+        });
+    };
+
+    $scope.incrementQuestions = function(increment) {
+    	$scope.myQuestionLimit += increment;
+    };
+
   }).
 
   controller('navController', function($scope, $http, $rootScope) {
@@ -125,35 +194,6 @@ angular.module('ACVApp.controllers', []).
   		$rootScope.$emit("killSession");
   	};
 
-  }).
-
-  controller('questionController', function($scope, $http, $rootScope) {
-
-  	$scope.myQuestionTitle;
-  	$scope.myQuestionBody;
-
-  	$scope.postQuestion = function() {
- 
-        var request = $http({
-        method: "post",
-        url: $scope.dbUrl,
-        params: {
-        	action: "addQuestion",
-        	question_to_add: $scope.myQuestionTitle,
-        	question_body: $scope.myQuestionBody
-        },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        });
-
-        /* Check whether the HTTP Request is Successfull or not. */
-        request.success(function (data) {
-        	console.log("Question literally maybe worked");
-        	console.log("SWEET SWEET QUESATIONS "+$scope.myQuestionTitle);
-        	if(data == false){
-        		alert("Post Question Failed");
-        	}
-        });
-    };
   }).
 
   controller('loginController', function($scope, $http, $rootScope) {
@@ -207,6 +247,16 @@ angular.module('ACVApp.controllers', []).
         });
     };
 
+  }).
+
+  controller('questionController', function($scope, $http, $rootScope) {
+  	$scope.time;
+
+  	$scope.convertDate = function(unix_timestamp){
+
+  		$scope.time= Date(unix_timestamp * 1000).format('h:i:s');
+  		console.log("TIME IS: "+$scope.time);
+  	};
   }).
 
   controller('userController', function($scope, $http, $rootScope) {

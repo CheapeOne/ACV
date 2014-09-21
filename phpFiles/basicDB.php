@@ -21,7 +21,7 @@
 		}
 		 catch (PDOException $ex) {
 			$msg = 'Connection failed:'.$ex->getMessage();
-			writeToLog($msg)
+			writeToLog($msg);
 			return false;
 		}
 	}
