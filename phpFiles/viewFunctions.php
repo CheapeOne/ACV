@@ -56,9 +56,10 @@ function getLoginInfo($email,$password){
 	if (isValidLogin($email,$password)){
 		$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);
 		$userInfoQuery = $dbconn->prepare("Select * from (Users as U inner join RegisteredUsers as R on U.UID = R.UID) where email = :email");
-		$userInfoQuery->execute(array(":email"=> 'derp@gmail.com'));
+		$userInfoQuery->execute(array(":email"=> $email));
 		$results = $userInfoQuery->fetch(PDO::FETCH_ASSOC);		
-		echo $results; //will return data in the form ["col1"=>rowdata,"col2"=>rowdata,..."colX"=>rowdata]
+		//print_r($results);
+		return json_encode($results); //will return data in the form ["col1"=>rowdata,"col2"=>rowdata,..."colX"=>rowdata]
 		}
 	else{
 		return false;
@@ -106,15 +107,31 @@ return $UID;
 }
 	
 //== Signup: ==
-function signup($UID,$IP,$sessionGeo,$userType,$username,$email,$password){
+function signup($ip,$sessionGeo,$userType,$username,$email,$password){
     //variables needed - $username,$email,$password,$IP,$sessionGeo - username can be a blank string
     //The following query returns one or zero rows
 	global $db_user, $db_password, $db_host, $db_name;
 
 	$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);
+
+	$allUIDsQuery  = $dbconn->query("Select UID from Users");
+		$results = $allUIDsQuery->fetchAll(PDO::FETCH_ASSOC);
+
+		$UID = mt_rand();
+
+		while (in_array($UID,$results)){
+			$UID = mt_rand();
+			}	
+
+
     $existingUserQuery  = $dbconn->prepare("Select email from RegisteredUsers where email = :email");
 	$existingUserQuery->execute(array(":email"=> $email));
 	$results = $existingUserQuery->fetch(PDO::FETCH_ASSOC);
+
+	//////
+
+			////////
+
 
     if ($results) {
 		//already a user
@@ -122,7 +139,12 @@ function signup($UID,$IP,$sessionGeo,$userType,$username,$email,$password){
 	}
     else{
 		//add as a user
-        $insertUserQuery = $dbconn->query("INSERT INTO registeredUsers (uid,email,userName,userRank) values ('$UID', '$email', '$username', 0)");
+		$insertUserStatement  = $dbconn->prepare("insert into users (sessionip,sessiongeo,UID,usertype) values (:ip,:sessiongeo,:UID,:usertype)");
+		$insertUserStatement->execute(array(":ip"=> $ip,":sessiongeo"=>$sessionGeo,":UID"=>$UID,":usertype"=>$userType));
+        //add as a REGISTERED user
+        $insertRegUserStatement = $dbconn->prepare("INSERT INTO registeredUsers (UID,email,userName,userRank,password) values (:UID,:email,:userName,'0',:password)");
+		$insertRegUserStatement->execute(array(":UID"=>$UID,":email"=>$email,":userName"=>$username, ":password"=> hash("sha256", $password)));	
+	
 	}
 }
 /*

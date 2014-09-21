@@ -8,7 +8,7 @@ $db_password = "yuhclickyuh";
 $db_name = "acvdatabase";
 $ip_table = "dbip_lookup";
 
-$ip_address = $_SERVER['REMOTE_ADDR'];//$_GET['ip_address'];
+$ip_address = $_SERVER['REMOTE_ADDR'];//$_GET['ip'];//$_GET['ip_address'];
 
 try {
 

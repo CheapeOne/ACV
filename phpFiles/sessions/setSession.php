@@ -3,7 +3,7 @@
 
 $name = $_GET['input'];
 
-
+session_destroy();
 session_start();
 
 	if (!isset($_SESSION['user'])) {
@@ -16,7 +16,7 @@ session_start();
 
 		if (time() > $_SESSION['deathTime']) {
 
-			session_destroy();
+			
 		}
 	}
 
