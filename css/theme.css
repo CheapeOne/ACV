@@ -42,8 +42,9 @@
 
 .question{
 	display: block;
-
-	margin: 30px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-right: 90px;
 }
 	
 	.vote-button{
@@ -55,8 +56,6 @@
 		font-size: 15pt;
 		font-weight: 500;
 		display: block;
-		width: 60px;
-		padding-left: 3px;
 	}
 
 .question-mid{
