@@ -17,7 +17,7 @@ session_start();
 
 		else {
 
-				if (time() > $_SESSION['deathTime']) {
+				if ($_SESSION['deathTime'] != null && time() > $_SESSION['deathTime']) {
 
 					session_destroy();
 				}
@@ -30,11 +30,13 @@ session_start();
 				echo json_encode($arr);
 		}
 	}
+	else {
 
 		$arr = array (
 		"username" => ""
-	);
+		);
 
 	echo json_encode($arr);
+	}
 
 ?>

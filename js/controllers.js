@@ -8,7 +8,26 @@ angular.module('ACVApp.controllers', []).
   	$scope.dbUrl = "phpFiles/sendToDB.php";
   	$scope.getLocationUrl = "phpFiles/geo/geolocator.php";
   	$scope.getSessionUrl = "phpFiles/sessions/getSession.php";
+  	$scope.setSessionUrl = "phpFiles/sessions/setSession.php";
+  	$scope.killSessionUrl = "phpFiles/sessions/killSession.php";
     
+  	/*	
+		Event Listeners
+  	*/
+
+  	$rootScope.$on("setSession", function(){
+  		if($rootScope.userAlias == null){
+  			alert("Cannot create Session, no one is signed in!");
+  		}
+  		else{
+  			$scope.setSession();
+  		}
+  	});
+
+  	$rootScope.$on("killSession", function(){
+  		$scope.killSession();
+  	});
+
   	$scope.getLocation = function() {
  
         var request = $http({
@@ -26,18 +45,16 @@ angular.module('ACVApp.controllers', []).
     };
 
     $scope.getSession = function() {
-        console.log("Got inside the getSession");
 
         var request = $http({
         method: "get",
         url: $scope.getSessionUrl,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
-        	console.log("Got past headers");
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        	console.log("Get Session probably literally worked");
+        	console.log("Session probably literally got");
         	//var sessionData = angular.fromJson(data)
         	//console.log(angular.fromJson(data)["username"]);
 
@@ -49,6 +66,39 @@ angular.module('ACVApp.controllers', []).
         	}
         });
     };
+
+    $scope.setSession = function() {
+ 
+        var request = $http({
+        method: "post",
+        url: $scope.setSessionUrl,
+        params: {
+        	input: $rootScope.userAlias
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+        	console.log("Session probably literally set");
+        });
+    };
+
+    $scope.killSession = function() {
+ 
+        var request = $http({
+        method: "post",
+        url: $scope.killSessionUrl,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+        	console.log("Session probably literally killed");
+        });
+    };
+
+
 
     $scope.postQuestion = function() {
  
@@ -84,7 +134,20 @@ angular.module('ACVApp.controllers', []).
   		$scope.loggedIn = true;
   	});
 
+  	// Set saved user values to null, destroy current session
+  	$scope.logout = function() {
 
+  		alert($rootScope.userAlias+" logged out!")
+
+  		$scope.loggedIn = false;
+  		$scope.navAlias = "";
+
+  		$rootScope.userAlias = null;
+  		$rootScope.userEmail = null;
+  		$rootScope.userScore = null;	
+
+  		$rootScope.$emit("killSession");
+  	};
 
   }).
 
@@ -97,7 +160,6 @@ angular.module('ACVApp.controllers', []).
   	$scope.myEmail;
   	$scope.myPassword;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
-  	$scope.setSessionUrl = "phpFiles/sessions/setSession.php";
 
   	$scope.prahLogin = function() {
   		$scope.myEmail = "tehdude@gmail.com";
@@ -135,29 +197,12 @@ angular.module('ACVApp.controllers', []).
         		$('#loginModal').modal('hide');
 
         		if($rootScope.userAlias != null){
-        			$scope.setSession();
+        			$rootScope.$emit("setSession");
         		}
         		else{
         			alert("Login messed up!");
         		}
         	}
-        });
-    };
-
-    $scope.setSession = function() {
- 
-        var request = $http({
-        method: "post",
-        url: $scope.setSessionUrl,
-        params: {
-        	input: $rootScope.userAlias
-        },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        });
-
-        /* Check whether the HTTP Request is Successfull or not. */
-        request.success(function (data) {
-        	console.log("Session probably literally worked");
         });
     };
 
@@ -215,7 +260,7 @@ angular.module('ACVApp.controllers', []).
         		$('#signupModal').modal('hide');
 
         		if($rootScope.userAlias != null){
-        			$scope.setSession();
+        			$rootScope.$emit("setSession");
         		}
         		else{
         			alert("Sign up messed up!");

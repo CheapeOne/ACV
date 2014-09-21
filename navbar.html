@@ -11,7 +11,7 @@
 	      </button>
 	      <a class="navbar-brand" href="/ACV/#/home">
 	      <img class="navbar-logo" src="img/ACV-Logo-Green.png"/>
-	      Location
+	      Quesi-ton
 	      </a>
 	    </div>
 
@@ -28,6 +28,7 @@
 	        <li><a href="/ACV/#/home">Home</a></li>
 	        <li ng-hide = "loggedIn"><a data-toggle="modal" data-target="#loginModal" href="">Login</a></li>
 	        <li ng-show = "loggedIn"><a data-toggle="modal" data-target="#userModal" href="">{{navAlias}}</a></li>
+	        <li ng-show = "loggedIn"><a ng-click="logout()" href="">Logout</a></li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 
