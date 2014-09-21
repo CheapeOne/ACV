@@ -1,182 +1,201 @@
 
 
 <div class="ACVGreen" ng-controller = "homeController" ng-init="getLocation(); getSession()">
-	<div class="page centered-outer">
-		<div class="centered-inner">
-			<br/>
-			<img class="logo" src="img/ACV-Logo.png"/>
-			<p></p>
-			<input type="text" placeholder="Question Title" ng-model="myQuestionTitle">
-			<p></p>
-			<input type="text" placeholder="Question Body" ng-model="myQuestionBody">
-			<br/>
-			<br/>
-			<button class="btn btn-default" ng-click="postQuestion()">Add Question</button>
 
-			<ng-include src="'pages/loginModal.html'"></ng-include>
-			<ng-include src="'pages/signupModal.html'"></ng-include>
-			<ng-include src="'pages/userModal.html'"></ng-include>
+	<ng-include src="'pages/loginModal.html'"></ng-include>
+	<ng-include src="'pages/signupModal.html'"></ng-include>
+	<ng-include src="'pages/userModal.html'"></ng-include>
+
+
+	<div class="banner centered-outer">
+		<div class="banner-inner centered-inner">
+			<div class="banner-logo">
+				<div class ="logo-holder">
+					<img class="logo" src="img/ACV-Logo-Banner.png"/>
+				</div>
+					
+				<span class="banner-word">{{myLocation}}</span>
+			</div>
+
+			<div class="category-bar">
+			</div>
 		</div>
+		
+		<img id="banner-background" src="img/DSC02021.jpg"/>
+
 	</div>
 
-	<div class="row question">
-
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
-		</div>
-
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
+	<div class="search-section row centered-outer">
+		<div class="search-section-content centered-inner">
+			<div class="form-group">
+		        <input type="text" class="form-control" placeholder="what do you want to know?">
+		    </div>
+	    </div>
+	    
 	</div>
 
-	<div class="row question">
+	<div ng-controller = "questionController">
 
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+		<div class="row question">
+
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
+
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
 		</div>
 
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
-	</div>
+		<div class="row question">
 
-	<div class="row question">
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
 
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
-		</div>
-
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
-	</div>
-
-	<div class="row question">
-
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
 		</div>
 
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
-	</div>
+		<div class="row question">
 
-	<div class="row question">
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
 
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
-		</div>
-
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
-	</div>
-
-	<div class="row question">
-
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
 		</div>
 
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
-	</div>
+		<div class="row question">
 
-	<div class="row question">
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
 
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
-		</div>
-
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
-	</div>
-
-	<div class="row question">
-
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
 		</div>
 
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
-	</div>
+		<div class="row question">
 
-	<div class="row question">
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
 
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
-		</div>
-
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
-		</div>
-	</div>
-
-	<div class="row question">
-
-		<div class="col-md-1 question-left ACVGreen">
-			<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
-			<span class="vote-score">9001</span>
-			<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
 		</div>
 
-		<div class="col-md-9 question-mid">
-			<a href=""><span class="question-title">How do I dude?</span></a>
-			<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
-			<span>|</span>
-			<span class="question-info">360 comments</span>
+		<div class="row question">
+
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
+
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
 		</div>
+
+		<div class="row question">
+
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
+
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
+		</div>
+
+		<div class="row question">
+
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
+
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
+		</div>
+
+		<div class="row question">
+
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
+
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
+		</div>
+
+		<div class="row question">
+
+			<div class="col-md-1 question-left ACVGreen">
+				<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
+				<span class="vote-score">9001</span>
+				<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
+			</div>
+
+			<div class="col-md-10 question-mid">
+				<a href=""><span class="question-title">How do I dude?</span></a>
+				<span class="question-info">asked 4 hours ago by <a href="">DoubleOhDude</a></span>
+				<span>|</span>
+				<span class="question-info">360 comments</span>
+			</div>
+		</div>
+
 	</div>
 
 </div>

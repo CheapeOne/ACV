@@ -32,7 +32,7 @@
 }
 
 .logo{
-	width: 100px;
+	width: 150px;
 }
 
 .question{
@@ -65,4 +65,51 @@
 	.question-time-info{
 	}
 
+.banner{
+	position: relative;
+	/* margin-top: 50px; */
+	height: 400px;
+	width: 100%;
+	overflow: hidden;
+}
 
+	.banner-inner{
+		position: absolute;
+		width:100%;
+		margin-top: 85px;
+	}
+
+	.logo-holder{
+		width: 100%;
+	}
+
+	.banner-logo{
+		margin: auto;
+		width: 400px;
+	}
+
+	.banner-word{
+		color: white;
+		font-size: 20pt;
+		font-weight: 300;
+	}
+
+	#banner-background{
+		width: 100%;
+	}
+
+.category-bar{
+	height: 60px;
+	width: 100%;
+	background-color: rgba(255,255,255,0.9);
+	margin-top: 67px;
+}
+
+
+.search-section{
+	padding: 10px;
+}
+
+	.search-section-content{
+		width:90%;
+	}
