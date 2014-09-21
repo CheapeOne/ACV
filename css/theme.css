@@ -36,6 +36,10 @@
 	width: 150px;
 }
 
+.questions-section{
+	margin-top: 391px;
+}
+
 .question{
 	display: block;
 
@@ -74,7 +78,7 @@
 
 .banner{
 	position: fixed;
-	/* margin-top: 50px; */
+	margin-top: -341px;
 	height: 325px;
 	width: 100%;
 	overflow: hidden;
@@ -143,7 +147,7 @@
 
 @media(max-width: 767px){
 	.banner{
-		margin-top: 132px;
+		margin-top: -229px;
 	}
 }
 
