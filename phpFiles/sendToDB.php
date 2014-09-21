@@ -38,7 +38,7 @@
 			break;
 
 		case "addQuestion":
-			echo addQuestion('7', $_GET['question_to_add'], $_GET['question_body'], 'general', time());
+			echo addQuestion('0', $_GET['question_to_add'], $_GET['question_body'], 'general', time());
 			break;
 
 		case "viewQuestions":
