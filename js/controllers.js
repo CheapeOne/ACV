@@ -6,34 +6,34 @@ angular.module('ACVApp.controllers', []).
   	$scope.myQuestionTitle;
   	$scope.myQuestionBody;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
+  	$scope.getLocationUrl = "phpFiles/geo/geolocator.php";
   	$scope.getSessionUrl = "phpFiles/sessions/getSession.php";
     
   	$scope.getLocation = function() {
  
         var request = $http({
-        method: "post",
-        url: $scope.dbUrl,
-        params: {
-        	action: "getLocation"
-        },
-        data:  {
-                question: $scope.question
-        },
+        method: "get",
+        url: $scope.getLocationUrl,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
+        	console.log("Get Location probably literally worked");
+        	console.log("Location Data: "+data);
+
         });
     };
 
     $scope.getSession = function() {
- 
+        console.log("Got inside the getSession");
+
         var request = $http({
         method: "get",
         url: $scope.getSessionUrl,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
+        	console.log("Got past headers");
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
@@ -84,6 +84,8 @@ angular.module('ACVApp.controllers', []).
   		$scope.loggedIn = true;
   	});
 
+
+
   }).
 
   controller('questionController', function($scope, $http) {
@@ -117,12 +119,12 @@ angular.module('ACVApp.controllers', []).
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        	if(data == "false"){
+        	if(data == false){
         		alert("Incorrect Email or Password");
         	}
         	else{
         		console.log("Login probably literally worked");
-
+        		console.log(data);
         		console.log("email: " + angular.fromJson(data)["email"]);
         		console.log("whole dealarino "+angular.fromJson(data));
 
@@ -138,8 +140,6 @@ angular.module('ACVApp.controllers', []).
         		else{
         			alert("Login messed up!");
         		}
-        		
-
         	}
         });
     };
@@ -179,35 +179,48 @@ angular.module('ACVApp.controllers', []).
 
   }).
 
-  controller('signupController', function($scope, $http) {
+  controller('signupController', function($scope, $http, $rootScope) {
 
   	$scope.myAlias;
   	$scope.myEmail;
   	$scope.myPassword;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
 
-   	$scope.addUser = function() {
+   	$scope.signup = function() {
  
         var request = $http({
         method: "post",
         url: $scope.dbUrl,
         params: {
-        	action: "addUser",
+        	action: "signup",
         	user_to_add: $scope.myAlias,
         	email: $scope.myEmail,
         	password: $scope.myPassword
-        },
-        data:  {
-                question: $scope.question
         },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
 
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
-        console.log("Signup literally worked");
-        console.log($scope.question);
+        	console.log("Signup probably literally worked");
+        	if(data == "false"){
+        		alert("User Already Exists");
+        	}
+        	else{
+        		$rootScope.userAlias =	$scope.myAlias;
+  				$rootScope.userEmail =	$scope.myEmail;
+  				$rootScope.userScore =	0;
+
+  				$rootScope.$emit("userLogin");
+        		$('#signupModal').modal('hide');
+
+        		if($rootScope.userAlias != null){
+        			$scope.setSession();
+        		}
+        		else{
+        			alert("Sign up messed up!");
+        		}
+        	}
         });
     };
-
   });
