@@ -1,6 +1,10 @@
 
 html{
-	background-color: #56CC81;
+	background: url('img/DSC02021.jpg') no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
 }
 
 div{
@@ -17,7 +21,7 @@ h1,p{
 }
 
 .ACVGreen{
-	background-color: #56CC81;
+	background-color: rgba(0,0,0,0);
 }
 
 a{
