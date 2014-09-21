@@ -6,10 +6,10 @@
 	$log_file = 'ACV_log_file.txt';
 	
 	function writeToLog($msg){
-
+	//assuming this file has been initialized in a main function
 		global $log_file;
 		file_put_contents($log_file,$msg,FILE_APPEND);
-		echo '[{$log_file}] '.time().' $msg';
+		echo "[{$log_file}] ".time()." $msg\n";
 	}
 	
 	function connectToDB($db_user, $db_password, $db_host, $db_name) {
@@ -21,7 +21,8 @@
 		}
 		 catch (PDOException $ex) {
 			$msg = 'Connection failed:'.$ex->getMessage();
-			writeToLog($msg);
+			writeToLog($msg)
+			return false;
 		}
 	}
 
