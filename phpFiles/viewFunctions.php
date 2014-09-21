@@ -138,9 +138,9 @@ function viewAnswersToQuestion($QID){
  	global $db_user, $db_password, $db_host, $db_name;
 	$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);
 	
-	$viewQAQuery = $dbconn->prepare("Select * from Questions where QID = :QID");
-	$viewQAAnswersQuery->execute(array(":QID"=> $QID));
-	$results = $viewAnswersQuery->fetchAll(PDO::FETCH_ASSOC);
+	$answersToQuestionsQuery = $dbconn->prepare("Select * from Questions where QID = :QID");
+	$answersToQuestionsQuery->execute(array(":QID"=> $QID));
+	$results = $answersToQuestionsQuery->fetchAll(PDO::FETCH_ASSOC);
 	return $results;
 }
 //== View Your Answers: ==
@@ -185,7 +185,7 @@ function addQuestion($title,$content,$category,$_timestamp){
     global $db_user, $db_password, $db_host, $db_name;
 	$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);	
 
-	$allQIDsQuery  = $dbconn->query("Select UID from Users");
+	$allQIDsQuery  = $dbconn->query("Select QID from Questions");
 	$results = $allUIDsQuery->fetchAll(PDO::FETCH_ASSOC);
 	$QID = mt_rand();
 	while (in_array($QID,$results)){
@@ -213,7 +213,7 @@ function addAnswer($QID,$title,$content,$category,$_timestamp){
 		$AID = $results['Max']+1;
 	}
 	else{
-		AID = 0;
+		$AID = 0;
 	}	
 
 	$insertAnswerStatement  = $dbconn->prepare("insert into answers (aid,qid,content,_timestamp,numRating) values ($QID,$content,$category,$_timestamp,'0')");
