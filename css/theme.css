@@ -76,6 +76,10 @@
 		margin-right: 12px;
 	}
 
+.question-left{
+	text-align: center;
+}
+
 .banner{
 	position: fixed;
 	margin-top: -341px;
