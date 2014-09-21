@@ -17,6 +17,7 @@
 
 .navbar{
 	margin: 0px;
+	z-index: 1000000;
 }
 
 .navbar-logo{
@@ -55,7 +56,7 @@
 	}
 
 .question-mid{
-	background-color: rgba(255,255,255,.9);
+	background-color: rgba(255,255,255,1);
 	color: grey;
 	padding: 15px 10px;
 	margin: 12px 0px;
@@ -70,17 +71,20 @@
 	}
 
 .banner{
-	position: relative;
+	position: fixed;
 	/* margin-top: 50px; */
-	height: 400px;
+	height: 325px;
 	width: 100%;
 	overflow: hidden;
+	z-index: 1000;
+	box-shadow: 0px 2px 30px black;
+
 }
 
 	.banner-inner{
 		position: absolute;
 		width:100%;
-		margin-top: 85px;
+		margin-top: 45px;
 	}
 
 	.logo-holder{
@@ -105,7 +109,7 @@
 .category-bar{
 	height: 60px;
 	width: 100%;
-	margin-top: 67px;
+	margin-top: 35px;
 }
 
 
@@ -122,5 +126,27 @@
 }
 
 	#show-more-button{
-		
+		background: rgba(0,0,0,0);
+		border: 5px solid white;
+		color: white;
+		font-family: 'Roboto';
+		font-weight: 300;
+		outline: none;
 	}
+
+.modal-dialog{
+	margin-top: 80px;
+}
+
+
+@media(max-width: 767px){
+	.banner{
+		margin-top: 132px;
+	}
+}
+
+@media(max-width: 636px){
+	.banner{
+		width:636px;
+	}
+}

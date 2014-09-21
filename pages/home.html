@@ -32,25 +32,25 @@
 			</div>
 		</div>
 		
-		<img id="banner-background" src="img/banner-pic.jpg"/>
+		<img id="banner-background" src="img/banner-pic-2.png"/>
 
 	</div>
 
-	<div>
+	<div class="questions-section">
 
 		<div class="row question" ng-repeat="question in questions">
 			<div>
-				<div class="col-md-1 question-left ACVGreen">
+				<div class="col-xs-1 question-left ACVGreen">
 					<a href=""><img class="vote-button" src="img/ACV-Upvote.png"/></a>
 					<span class="vote-score">{{question["numRating"]}}</span>
 					<a href=""><img class="vote-button" src="img/ACV-Downvote.png"/></a>
 				</div>
 
-				<div class="col-md-10 question-mid">
+				<div class="col-xs-11 question-mid">
 					<a href=""><span class="question-title">{{question["title"]}}</span></a>
 					<span class="question-info">asked in last {{ Math.ceil((currentTime-question["_timestamp"]*1000)/(3600000)) }} hour(s) by <a href="">Anonymous</a></span>
 					<span>|</span>
-					<span class="question-info">0 comments</span>
+					<a href=""><span class="question-info">0 comments</span></a>
 				</div>
 			</div>
 		</div>
