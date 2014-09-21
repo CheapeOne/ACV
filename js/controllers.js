@@ -30,6 +30,29 @@ angular.module('ACVApp.controllers', []).
   		$scope.killSession();
   	});
 
+  	$scope.initAnonUser = function() {
+ 
+        var request = $http({
+        method: "get",
+        url: $scope.dbUrl,
+        params: {
+        	action: "initAnonUID",
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+
+        /* Check whether the HTTP Request is Successfull or not. */
+        request.success(function (data) {
+
+        	if(data==false){
+        		alert("Failed to create Anonymous User!");
+        	}
+        	console.log("Added anonymous user probably literally worked");
+        	
+
+        });
+    };
+
   	$scope.getLocation = function() {
  
         var request = $http({
@@ -42,8 +65,6 @@ angular.module('ACVApp.controllers', []).
         request.success(function (data) {
         	console.log("Get Location probably literally worked");
         	$scope.myLocation = data;
-
-
 
         });
     };
