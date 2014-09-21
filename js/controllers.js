@@ -6,7 +6,7 @@ angular.module('ACVApp.controllers', []).
   	$scope.myQuestionTitle;
   	$scope.myQuestionBody;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
-  	  	$scope.getSessionUrl = "phpFiles/sessions/getSession.php";
+  	$scope.getSessionUrl = "phpFiles/sessions/getSession.php";
     
   	$scope.getLocation = function() {
  
@@ -38,9 +38,12 @@ angular.module('ACVApp.controllers', []).
         /* Check whether the HTTP Request is Successfull or not. */
         request.success(function (data) {
         	console.log("Get Session probably literally worked");
-        	console.log(angular.fromJson(data)["username"]);
+        	//var sessionData = angular.fromJson(data)
+        	//console.log(angular.fromJson(data)["username"]);
+
 
         	if(angular.fromJson(data)["username"] != ""){
+
         		$rootScope.userAlias = angular.fromJson(data)["username"];
         		$rootScope.$emit("userLogin");
         	}
@@ -94,13 +97,18 @@ angular.module('ACVApp.controllers', []).
   	$scope.dbUrl = "phpFiles/sendToDB.php";
   	$scope.setSessionUrl = "phpFiles/sessions/setSession.php";
 
+  	$scope.prahLogin = function() {
+  		$scope.myEmail = "tehdude@gmail.com";
+  		$scope.myPassword = "helloworld";
+  	};
+
    	$scope.isValidLogin = function() {
 
         var request = $http({
         method: "post",
         url: $scope.dbUrl,
         params: {
-        	action: "isValidLogin",
+        	action: "getLoginInfo",
         	email: $scope.myEmail,
         	password: $scope.myPassword
         },
@@ -114,12 +122,23 @@ angular.module('ACVApp.controllers', []).
         	}
         	else{
         		console.log("Login probably literally worked");
-        		$rootScope.userAlias = "Double Oh Dude";
-        		$rootScope.userEmail = $scope.myEmail;
+
+        		console.log("email: " + angular.fromJson(data)["email"]);
+        		console.log("whole dealarino "+angular.fromJson(data));
+
+        		$rootScope.userAlias = angular.fromJson(data)["userName"];
+        		$rootScope.userEmail = angular.fromJson(data)["email"];
+        		$rootScope.userScore = angular.fromJson(data)["userRank"];
         		$rootScope.$emit("userLogin");
         		$('#loginModal').modal('hide');
 
-        		$scope.setSession();
+        		if($rootScope.userAlias != null){
+        			$scope.setSession();
+        		}
+        		else{
+        			alert("Login messed up!");
+        		}
+        		
 
         	}
         });
@@ -148,11 +167,14 @@ angular.module('ACVApp.controllers', []).
 
   	$scope.myAlias;
   	$scope.myEmail;
-  	$scope.myPassword;
+  	$scope.myScore;
   	$scope.dbUrl = "phpFiles/sendToDB.php";
 
   	$rootScope.$on("userLogin", function(){
   		$scope.myAlias = $rootScope.userAlias;
+  		$scope.myEmail = $rootScope.userEmail;
+  		$scope.myScore = $rootScope.userScore;
+  	
   	});
 
   }).

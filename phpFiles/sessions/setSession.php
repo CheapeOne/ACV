@@ -2,7 +2,7 @@
 
 
 $name = $_GET['input'];
-session_destroy();
+
 
 session_start();
 

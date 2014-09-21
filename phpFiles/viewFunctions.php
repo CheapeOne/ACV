@@ -56,9 +56,9 @@ function getLoginInfo($email,$password){
 	if (isValidLogin($email,$password)){
 		$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);
 		$userInfoQuery = $dbconn->prepare("Select * from (Users as U inner join RegisteredUsers as R on U.UID = R.UID) where email = :email");
-		$userInfoQuery->execute(array(":email"=> $email));
-		$results = $loginQuery->fetch(PDO::FETCH_ASSOC);		
-		return $results; //will return data in the form ["col1"=>rowdata,"col2"=>rowdata,..."colX"=>rowdata]
+		$userInfoQuery->execute(array(":email"=> 'derp@gmail.com'));
+		$results = $userInfoQuery->fetch(PDO::FETCH_ASSOC);		
+		echo $results; //will return data in the form ["col1"=>rowdata,"col2"=>rowdata,..."colX"=>rowdata]
 		}
 	else{
 		return false;
@@ -77,7 +77,7 @@ function initAnonUID($ip,$geolocation){
 	global $db_user, $db_password, $db_host, $db_name;
 
 	$dbconn = connectToDB($db_user, $db_password, $db_host, $db_name);//
-    $existingAnonQuery  = $dbconn->prepare("Select uid from Users where usertype = 0 and ip = :ip");
+    $existingAnonQuery  = $dbconn->prepare("Select UID from Users where usertype = 0 and sessionip = :ip");
 	$existingAnonQuery->execute(array(":ip"=> $ip));
 	$results = $existingAnonQuery->fetch(PDO::FETCH_ASSOC);
 	

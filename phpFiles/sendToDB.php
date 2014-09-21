@@ -13,7 +13,7 @@
 	$fillerLocation = "Atlanta, GA";
 	$fillerUID = '1752698682';
 
-	$action_to_execute = "signup";
+	$action_to_execute = "initAnonUID";
 
 	switch($action_to_execute) {
 

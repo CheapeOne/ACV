@@ -3,28 +3,38 @@
 
 session_start();
 
-	if (isset($_SESSION['user']) && (time() <= $_SESSION['deathTime'])) {
+	if ($_SESSION) {
 
-			$arr = array (
-				"username" => $_SESSION['user']
-			);
+		if (isset($_SESSION['user']) && (time() <= $_SESSION['deathTime'])) {
 
-			echo json_encode($arr);
+				$arr = array (
+					"username" => $_SESSION['user']
+				);
 
-	} 
+				echo json_encode($arr);
 
-	else {
+		} 
 
-		if (time() > $_SESSION['deathTime']) {
+		else {
 
-			session_destroy();
+				if (time() > $_SESSION['deathTime']) {
+
+					session_destroy();
+				}
+			
+
+				$arr = array (
+					"username" => ""
+				);
+
+				echo json_encode($arr);
 		}
-
-			$arr = array (
-				"username" => ""
-			);
-
-			echo json_encode($arr);
 	}
+
+		$arr = array (
+		"username" => ""
+	);
+
+	echo json_encode($arr);
 
 ?>
